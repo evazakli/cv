@@ -1,0 +1,1210 @@
+/* ==========================================================================
+   EMRE VAHİT AZAKLI — "KARADENİZ ESİNTİSİ" KİŞİSEL PORTFÖY TEMASI
+   Mühendislik Zarafeti + Derin Deniz Dinginliği
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. CSS DEĞİŞKENLERİ & TEMA PALETİ
+   -------------------------------------------------------------------------- */
+:root {
+  /* Açık Tema (Varsayılan): Sıcak Kum/Krem & Derin Petrol Mavisi */
+  --bg-primary: #F6F3EC;
+  --bg-surface: #EDE8DE;
+  --bg-surface-elevated: #FAF8F5;
+  --bg-card: rgba(250, 248, 245, 0.85);
+  
+  --accent-petrol: #153B3F;
+  --accent-petrol-light: #1C4A4E;
+  --accent-foam: #BFE3D6;
+  --accent-foam-subtle: rgba(191, 227, 214, 0.25);
+  --accent-coral: #D97D54;
+  --accent-coral-hover: #C66C44;
+
+  --text-primary: #2B3538;
+  --text-secondary: #516266;
+  --text-tertiary: #7D8F92;
+  --text-inverse: #F6F3EC;
+
+  --border-color: rgba(21, 59, 63, 0.16);
+  --border-subtle: rgba(21, 59, 63, 0.08);
+  --border-focus: #153B3F;
+
+  --font-heading: 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-body: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+
+  --transition-fast: 0.2s cubic-bezier(0.2, 0, 0, 1);
+  --transition-normal: 0.3s cubic-bezier(0.2, 0, 0, 1);
+
+  --max-width: 1060px;
+  --header-height: 72px;
+}
+
+/* Koyu Tema: Gece Denizi Petrolü & Krem Yazılar */
+[data-theme="dark"] {
+  --bg-primary: #0E2426;
+  --bg-surface: #132F32;
+  --bg-surface-elevated: #17383C;
+  --bg-card: rgba(19, 47, 50, 0.85);
+
+  --accent-petrol: #30757B;
+  --accent-petrol-light: #4A969E;
+  --accent-foam: #BFE3D6;
+  --accent-foam-subtle: rgba(191, 227, 214, 0.15);
+  --accent-coral: #E28B64;
+  --accent-coral-hover: #F09A73;
+
+  --text-primary: #F6F3EC;
+  --text-secondary: #ADC1C0;
+  --text-tertiary: #718E8D;
+  --text-inverse: #0E2426;
+
+  --border-color: rgba(191, 227, 214, 0.18);
+  --border-subtle: rgba(191, 227, 214, 0.08);
+  --border-focus: #BFE3D6;
+}
+
+/* --------------------------------------------------------------------------
+   2. TEMEL SIFIRLAMA & TİPOGRAFİ
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.7;
+  min-height: 100vh;
+  position: relative;
+  overflow-x: hidden;
+  transition: background-color var(--transition-normal), color var(--transition-normal);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  color: var(--text-primary);
+  line-height: 1.25;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+p {
+  margin-bottom: 1rem;
+  max-width: 68ch;
+}
+
+p:last-child {
+  margin-bottom: 0;
+}
+
+a {
+  color: var(--accent-coral);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--accent-coral-hover);
+}
+
+ul {
+  list-style: none;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: transparent;
+}
+
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   3. ARKA PLAN DOKULARI (SONAR KONTUR & TEKNİK MÜHENDİSLİK ÇİZİM KAĞIDI)
+   -------------------------------------------------------------------------- */
+.contour-bg-layer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0.045;
+  transition: opacity var(--transition-normal);
+}
+
+[data-theme="dark"] .contour-bg-layer {
+  opacity: 0.07;
+}
+
+.contour-svg {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.contour-line {
+  fill: none;
+  stroke: var(--accent-petrol);
+  stroke-width: 1.2;
+}
+
+.contour-line.secondary {
+  stroke-dasharray: 4 6;
+  stroke-width: 0.8;
+  opacity: 0.7;
+}
+
+/* Hafif Teknik Çizim Nokta / Kare Izgara Dokusu (%2-3 opaklık) */
+.technical-grid-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  pointer-events: none;
+  z-index: 0;
+  background-image: 
+    radial-gradient(var(--text-primary) 0.5px, transparent 0.5px);
+  background-size: 32px 32px;
+  opacity: 0.035;
+}
+
+[data-theme="dark"] .technical-grid-overlay {
+  opacity: 0.05;
+}
+
+/* --------------------------------------------------------------------------
+   4. ÜST MENÜ & NAVİGASYON (SITE HEADER)
+   -------------------------------------------------------------------------- */
+.site-header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--header-height);
+  z-index: 100;
+  background-color: rgba(246, 243, 236, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color var(--transition-normal), border-color var(--transition-normal);
+}
+
+[data-theme="dark"] .site-header {
+  background-color: rgba(14, 36, 38, 0.88);
+}
+
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+/* Brand Link */
+.brand-link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.brand-name {
+  font-family: var(--font-heading);
+  font-size: 1.25rem;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  color: var(--accent-petrol);
+  text-transform: lowercase;
+}
+
+[data-theme="dark"] .brand-name {
+  color: var(--accent-foam);
+}
+
+/* Desktop Nav */
+.site-nav {
+  display: none;
+}
+
+@media (min-width: 900px) {
+  .site-nav {
+    display: block;
+  }
+}
+
+.nav-list {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  padding: 0.35rem 0.15rem;
+  position: relative;
+  transition: color var(--transition-fast);
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background-color: var(--accent-petrol);
+  transition: width var(--transition-normal);
+}
+
+[data-theme="dark"] .nav-link::after {
+  background-color: var(--accent-foam);
+}
+
+.nav-link:hover,
+.nav-link.active {
+  color: var(--text-primary);
+}
+
+.nav-link.active::after {
+  width: 100%;
+}
+
+/* Header Actions */
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.theme-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  background-color: var(--bg-surface);
+  transition: background-color var(--transition-fast), border-color var(--transition-fast), color var(--transition-fast);
+}
+
+.theme-toggle-btn:hover {
+  background-color: var(--accent-foam-subtle);
+  border-color: var(--border-focus);
+}
+
+.sun-icon {
+  display: none;
+}
+.moon-icon {
+  display: block;
+}
+
+[data-theme="dark"] .sun-icon {
+  display: block;
+}
+[data-theme="dark"] .moon-icon {
+  display: none;
+}
+
+/* Mobile Menu Button */
+.mobile-menu-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 36px;
+  height: 36px;
+  gap: 4px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+}
+
+@media (min-width: 900px) {
+  .mobile-menu-btn {
+    display: none;
+  }
+}
+
+.menu-bar {
+  width: 16px;
+  height: 1.5px;
+  background-color: var(--text-primary);
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+}
+
+.mobile-menu-btn[aria-expanded="true"] .menu-bar:nth-child(1) {
+  transform: translateY(5.5px) rotate(45deg);
+}
+.mobile-menu-btn[aria-expanded="true"] .menu-bar:nth-child(2) {
+  opacity: 0;
+}
+.mobile-menu-btn[aria-expanded="true"] .menu-bar:nth-child(3) {
+  transform: translateY(-5.5px) rotate(-45deg);
+}
+
+/* Mobile Nav Drawer */
+.mobile-nav-drawer {
+  display: none;
+  position: absolute;
+  top: var(--header-height);
+  left: 0;
+  width: 100%;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-color);
+  padding: 1.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.06);
+}
+
+.mobile-nav-drawer.open {
+  display: block;
+}
+
+.mobile-nav-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.mobile-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  padding: 0.35rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* --------------------------------------------------------------------------
+   5. BUTONLAR & ETKİLEŞİM ELEMANLARI
+   -------------------------------------------------------------------------- */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 0.625rem 1.25rem;
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: var(--accent-petrol);
+  color: var(--text-inverse);
+  border: 1px solid var(--accent-petrol);
+}
+
+[data-theme="dark"] .btn-primary {
+  background-color: var(--accent-foam);
+  color: #0E2426;
+  border-color: var(--accent-foam);
+}
+
+.btn-primary:hover {
+  background-color: var(--accent-petrol-light);
+  color: var(--text-inverse);
+  transform: translateY(-1px);
+}
+
+[data-theme="dark"] .btn-primary:hover {
+  background-color: #d6f2e8;
+  color: #0E2426;
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+.btn-outline:hover {
+  background-color: var(--bg-surface);
+  border-color: var(--border-focus);
+  color: var(--text-primary);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid transparent;
+}
+
+.btn-ghost:hover {
+  color: var(--text-primary);
+  background-color: var(--bg-surface);
+  border-color: var(--border-subtle);
+}
+
+.btn-arrow {
+  transition: transform var(--transition-fast);
+}
+
+.btn-primary:hover .btn-arrow {
+  transform: translateX(3px);
+}
+
+/* --------------------------------------------------------------------------
+   6. HERO SECTION
+   -------------------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  z-index: 1;
+  padding-top: calc(var(--header-height) + 4rem);
+  padding-bottom: 5.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.hero-container {
+  width: 100%;
+}
+
+.hero-content {
+  width: 100%;
+  max-width: 820px;
+  text-align: left;
+}
+
+.hero-title {
+  font-size: 2.75rem;
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  margin-bottom: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .hero-title {
+    font-size: 3.35rem;
+  }
+}
+
+/* Horizon Line with Left/Right Ticks */
+.horizon-line-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 480px;
+  margin: 1.25rem 0 1.5rem 0;
+}
+
+.horizon-tick {
+  width: 1px;
+  height: 9px;
+  background-color: var(--accent-petrol);
+  opacity: 0.5;
+}
+
+[data-theme="dark"] .horizon-tick {
+  background-color: var(--accent-foam);
+}
+
+.horizon-line {
+  flex: 1;
+  height: 1.5px;
+  background-color: var(--accent-petrol);
+  opacity: 0.4;
+  transform-origin: left center;
+  animation: drawHorizon 1.2s cubic-bezier(0.2, 0, 0, 1) forwards;
+}
+
+[data-theme="dark"] .horizon-line {
+  background-color: var(--accent-foam);
+  opacity: 0.5;
+}
+
+@keyframes drawHorizon {
+  0% {
+    transform: scaleX(0);
+    opacity: 0;
+  }
+  100% {
+    transform: scaleX(1);
+    opacity: 0.45;
+  }
+}
+
+.horizon-label {
+  position: absolute;
+  right: 0;
+  top: -14px;
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  color: var(--text-tertiary);
+}
+
+.hero-subtitle {
+  font-size: 1.35rem;
+  font-weight: 600;
+  color: var(--accent-coral);
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.hero-brief {
+  font-size: 1.1rem;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  margin-bottom: 2.25rem;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+/* --------------------------------------------------------------------------
+   7. BÖLÜM YAPISI & BAŞLIKLAR
+   -------------------------------------------------------------------------- */
+.content-section {
+  position: relative;
+  z-index: 1;
+  padding: 5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.section-header {
+  margin-bottom: 2.75rem;
+}
+
+.section-meta {
+  display: inline-flex;
+  align-items: center;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--accent-coral);
+  margin-bottom: 0.4rem;
+}
+
+.section-tag {
+  letter-spacing: 0.12em;
+}
+
+.section-title {
+  font-size: 1.85rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 0.85rem;
+}
+
+.section-horizon {
+  width: 100%;
+  height: 1px;
+  background: linear-gradient(90deg, var(--border-color) 0%, var(--border-subtle) 60%, transparent 100%);
+  position: relative;
+}
+
+.section-horizon::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: -3px;
+  width: 24px;
+  height: 7px;
+  border-left: 1.5px solid var(--accent-petrol);
+  border-right: 1.5px solid var(--accent-petrol);
+  opacity: 0.6;
+}
+
+[data-theme="dark"] .section-horizon::before {
+  border-left-color: var(--accent-foam);
+  border-right-color: var(--accent-foam);
+}
+
+/* --------------------------------------------------------------------------
+   8. HAKKIMDA BÖLÜMÜ & SÜTUNLARI
+   -------------------------------------------------------------------------- */
+.about-main-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  text-align: left;
+}
+
+.lead-text {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: var(--text-primary);
+  margin-bottom: 1.75rem;
+  max-width: 100%;
+  text-align: left;
+}
+
+.engineering-pillars {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+}
+
+@media (min-width: 768px) {
+  .engineering-pillars {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.pillar-item {
+  padding: 1.25rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.pillar-icon {
+  font-size: 1.4rem;
+  margin-bottom: 0.65rem;
+}
+
+.pillar-title {
+  font-family: var(--font-heading);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
+}
+
+.pillar-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-bottom: 0;
+}
+
+/* --------------------------------------------------------------------------
+   9. KARTLAR & GRID DÜZENLERİ (DENEYİM, EĞİTİM, PROJELER, KURSLAR)
+   -------------------------------------------------------------------------- */
+.cards-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .cards-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.cards-timeline {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.tech-card {
+  position: relative;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: border-color var(--transition-fast), background-color var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.tech-card:hover {
+  border-color: var(--border-focus);
+  background-color: var(--bg-surface-elevated);
+}
+
+.card-top-meta {
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.card-period {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--accent-coral);
+  display: block;
+}
+
+.card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.35rem;
+  line-height: 1.35;
+  text-align: left;
+}
+
+.card-subtitle {
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--accent-petrol);
+  margin-bottom: 0.85rem;
+  line-height: 1.45;
+  text-align: left;
+}
+
+[data-theme="dark"] .card-subtitle {
+  color: var(--accent-foam);
+}
+
+.card-description {
+  font-size: 0.925rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 0;
+  text-align: left;
+  flex: 1;
+}
+
+/* Bullet details inside cards: Strict grid alignment so wrapped lines align with the text above */
+.card-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  margin-top: 1rem;
+  padding-top: 0.85rem;
+  border-top: 1px dashed var(--border-subtle);
+  list-style: none;
+}
+
+.card-detail-item {
+  display: grid;
+  grid-template-columns: 16px 1fr;
+  align-items: baseline;
+  gap: 0.4rem;
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  text-align: left;
+}
+
+.card-detail-item > span:last-child {
+  text-align: left;
+  line-height: 1.6;
+}
+
+.detail-marker {
+  color: var(--accent-coral);
+  font-weight: 700;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   10. BECERİLER & DİLLER BÖLÜMÜ
+   -------------------------------------------------------------------------- */
+.skills-lang-layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .skills-lang-layout {
+    grid-template-columns: 1.4fr 1fr;
+  }
+}
+
+.technical-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 1.75rem;
+}
+
+.card-header-mini {
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.mini-tag {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  font-weight: 600;
+  color: var(--accent-coral);
+}
+
+.skills-pill-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+}
+
+.skill-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.45rem 0.85rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-heading);
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  transition: all var(--transition-fast);
+}
+
+.skill-pill::before {
+  content: '▪';
+  color: var(--accent-petrol);
+  font-size: 0.85rem;
+}
+
+[data-theme="dark"] .skill-pill::before {
+  color: var(--accent-foam);
+}
+
+.skill-pill:hover {
+  border-color: var(--border-focus);
+  background-color: var(--bg-surface-elevated);
+}
+
+.languages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.lang-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.85rem 1rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.lang-name {
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+
+.lang-level {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  padding: 0.2rem 0.5rem;
+  border-radius: var(--radius-sm);
+  background-color: var(--accent-foam-subtle);
+  color: var(--accent-petrol);
+  font-weight: 600;
+}
+
+[data-theme="dark"] .lang-level {
+  color: var(--accent-foam);
+  background-color: rgba(191, 227, 214, 0.12);
+}
+
+/* --------------------------------------------------------------------------
+   11. SINAVLAR BÖLÜMÜ
+   -------------------------------------------------------------------------- */
+.exams-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.5rem;
+}
+
+@media (min-width: 600px) {
+  .exams-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.exam-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.5rem 1.75rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  position: relative;
+  overflow: hidden;
+}
+
+.exam-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--accent-coral);
+}
+
+.exam-meta {
+  display: flex;
+  flex-direction: column;
+}
+
+.exam-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.exam-score-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.score-num {
+  font-family: var(--font-heading);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: var(--accent-petrol);
+  letter-spacing: -0.03em;
+  line-height: 1;
+}
+
+[data-theme="dark"] .score-num {
+  color: var(--accent-foam);
+}
+
+.score-unit {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+}
+
+/* --------------------------------------------------------------------------
+   12. İLETİŞİM BÖLÜMÜ
+   -------------------------------------------------------------------------- */
+.contact-card {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-color);
+  border-radius: var(--radius-md);
+  padding: 2.5rem;
+}
+
+.contact-lead {
+  font-size: 1.05rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 2rem;
+}
+
+.contact-links-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1.25rem;
+}
+
+@media (min-width: 700px) {
+  .contact-links-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.contact-item {
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  background-color: var(--bg-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+  color: var(--text-primary);
+  text-decoration: none;
+}
+
+.contact-item:hover {
+  border-color: var(--border-focus);
+  background-color: var(--bg-surface-elevated);
+  transform: translateY(-2px);
+}
+
+.contact-label {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--accent-coral);
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.35rem;
+}
+
+.contact-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  word-break: break-all;
+  color: var(--text-primary);
+}
+
+.contact-action-hint {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--text-tertiary);
+  margin-top: 0.5rem;
+}
+
+/* --------------------------------------------------------------------------
+   13. FOOTER
+   -------------------------------------------------------------------------- */
+.site-footer {
+  position: relative;
+  z-index: 1;
+  padding: 3rem 0;
+  border-top: 1px solid var(--border-color);
+  background-color: var(--bg-surface);
+  margin-top: 3rem;
+}
+
+.footer-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  align-items: center;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .footer-container {
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: left;
+  }
+}
+
+.footer-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-title {
+  font-family: var(--font-heading);
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
+
+.footer-desc {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.footer-center {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-tertiary);
+}
+
+.spec-label {
+  color: var(--accent-coral);
+  font-weight: 600;
+}
+
+.spec-sep {
+  margin: 0 0.4rem;
+  opacity: 0.4;
+}
+
+.back-to-top {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  padding: 0.4rem 0.75rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  background-color: var(--bg-primary);
+  transition: all var(--transition-fast);
+}
+
+.back-to-top:hover {
+  color: var(--text-primary);
+  border-color: var(--border-focus);
+}
+
+/* --------------------------------------------------------------------------
+   14. SCROLL ANİMASYONLARI (REVEAL) & ERİŞİLEBİLİRLİK
+   -------------------------------------------------------------------------- */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.6s cubic-bezier(0.2, 0, 0, 1), transform 0.6s cubic-bezier(0.2, 0, 0, 1);
+  will-change: opacity, transform;
+}
+
+.reveal-on-scroll.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* prefers-reduced-motion Desteği: Tüm animasyonları ve geçişleri kapat */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .reveal-on-scroll {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .horizon-line {
+    animation: none !important;
+    transform: scaleX(1) !important;
+  }
+}

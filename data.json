@@ -1,0 +1,93 @@
+{
+  "profile": {
+    "name": "Emre Vahit AZAKLI",
+    "title": "Mühendis",
+    "summary": "Eğitim hayatıma Endüstri Mühendisliği alanında Yüksek Lisans eğitimiyle devam ediyorum. Takım çalışmasına yatkın ve analitik düşünmeye çalışan biri olarak, ekipler arası süreçlere hızlıca adapte olabileceğime inanıyorum.",
+    "email": "emrevahitazakli@hotmail.com",
+    "phone": "+90535*******",
+    "github": "https://github.com/evazakli"
+  },
+  "skills": ["Python", "MS Office", "Power BI", "SQL", "Matlab/Simulink", "AI Araçları", "Git"],
+  "languages": [{ "name": "İngilizce", "level": "Upper intermediate" }],
+  "experience": [
+    {
+      "role": "Stajyer Mühendis",
+      "company": "TASECS İklimlendirme A.Ş (Ankara)",
+      "period": "7 Temmuz - 3 Eylül 2025",
+      "description": "TUSAŞ iştiraki olan savunma sanayii şirketinde savunma sanayii ortamını gözlemleme fırsatı yakaladım. Staj süresince Çevresel Kontrol Sistemleri hakkında temel bilgiler edindim. Sayısal Tasarım alanında kendimi geliştirme fırsatı yakaladım."
+    },
+    {
+      "role": "Stajyer Mühendis",
+      "company": "Trabzon Üniversitesi / Büyük Veri ve Yapay Zeka Koordinatörlüğü (Trabzon)",
+      "period": "Temmuz - Ağustos 2024",
+      "description": "Staj süresince benden bir proje önerisinde bulunmam istendi. Bunun üzerine Enerji Tüketimi Optimizasyonu ile ilgili bir proje raporu yazdım. Bunun haricinde koordinatörlük bünyesinde gerçekleştirilen veritabanı uygulamaları, Türkçe Doğal Dil İşleme projeleri gibi projeleri gözlemleme fırsatı yakaladım."
+    }
+  ],
+  "education": [
+    {
+      "school": "Karadeniz Teknik Üniversitesi",
+      "degree": "Endüstri Mühendisliği, Yüksek Lisans",
+      "period": "2026 - Devam",
+      "details": [
+        "2026 Güz dönemi itibariyle yüksek lisans eğitimine başlandı."
+      ]
+    },
+    {
+      "school": "Karadeniz Teknik Üniversitesi",
+      "degree": "Elektrik-Elektronik Mühendisliği (%100 İngilizce) — GNO: 3.18",
+      "period": "2020 - 2025",
+      "details": [
+        "2020-2021 döneminde İngilizce Hazırlık eğitimi alındı.",
+        "Bitirme Tezi: Akıllı Telefon Tabanlı Ataletsel Navigasyon Sistemi"
+      ]
+    }
+  ],
+  "courses": [
+    {
+      "name": "Yapay Zeka ve Makine Öğrenmesi Modülü",
+      "institution": "Veri Analizi Okulu",
+      "period": "2025-2026",
+      "details": ["Marmara, ODTÜ, Boğaziçi ve İTÜ işbirliğiyle gerçekleştirildi.",
+      "Ekim 2025 - Mayıs 2026 tarihleri arasında 7 aylık kapsamlı online eğitim programı tamamlandı."]
+    },
+    {
+      "name": "Otonom Sürüş Teknolojileri",
+      "institution": "T.C. Sanayi ve Teknoloji Bakanlığı",
+      "period": "2024",
+      "details": ["4 Kasım - 7 Aralık tarihleri arasında gerçekleştirilen 10 oturumluk Otonom Sürüş Teknolojileri Temel Eğitim Programı tamamlandı."]
+    }
+  ],
+  "projects": [
+    {
+      "name": "Pomodoro v0.3",
+      "period": "Ekim 2025",
+      "description": "Python ve CustomTkinter kullanılarak geliştirilen, çalışma sürelerini takip etmeye ve kişisel verimliliği artırmaya yönelik masaüstü Pomodoro uygulaması. Uygulamada modüler mimari, kalıcı veri yönetimi, güvenli zamanlayıcı altyapısı, hedef takibi, etkinlik yönetimi ve görsel istatistikler geliştirilmiştir.",
+      "outcomes": ["JSON tabanlı kalıcı veri yönetimi ve cache mekanizması geliştirildi.",
+      "Görev/süre bazlı hedef takibi, geçmiş kayıtları ve günlük–yıllık verimlilik istatistikleri oluşturuldu.",
+      "Canvas tabanlı grafikler, analog/dijital timer ve dinamik arka plan animasyonu geliştirildi.",
+      "Takvim, etkinlik geri sayımı, timezone-aware tarih/saat kontrolü ve özelleştirilebilir tema/ses sistemi eklendi."
+    ]
+    },
+    {
+      "name": "Akıllı Telefon Tabanlı Ataletsel Navigasyon Sistemi",
+      "period": "Haziran 2024 - Haziran 2025",
+      "description": "Lisans bitirme projesi kapsamında akıllı telefon atalet sensörlerinden alınan sensör verileri Matlab Mobil ile bulut üzerinden masaüstüne aktarılıp, sensör verileri burada işlenerek akıllı telefonun 3 boyutlu uzaydaki hareketi algılanmaya çalışılmaktadır.",
+      "outcomes": []
+    },
+    {
+      "name": "Enerji Tüketimi Optimizasyonu",
+      "period": "Temmuz - Ağustos 2024",
+      "description": "Fakülte odalarındaki elektrikli cihazların enerji tüketimini analiz etmek ve kontrol altına almak için bir proje önerisi hazırladım.",
+      "outcomes": [
+        "Cihazların enerji tüketim miktarlarını belirledim.",
+        "Mesai içi ve dışı beklenen tüketim seviyelerini tanımladım.",
+        "Gerçek zamanlı enerji tüketiminin enerji analizörü ile takip edilebileceğini belirttim.",
+        "Anlık tüketim izlenerek belirlenen değerlerin aşılması halinde uyarı verecek bir sistem tasarımı önerisinde bulundum."
+      ]
+    }
+  ],
+  "exams": [
+    { "name": "ALES (2026/2)", "score": "86.52" },
+    { "name": "YÖKDİL (2026/2)", "score": "75" }
+  ]
+}
