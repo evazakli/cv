@@ -839,6 +839,82 @@ button {
   line-height: 1.6;
 }
 
+/* Proje kartı bağlantıları */
+.card-title-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: color var(--transition-fast);
+}
+
+.card-title-link:hover {
+  color: var(--accent-coral);
+}
+
+.inline-link-icon {
+  opacity: 0.55;
+  transition: transform var(--transition-fast), opacity var(--transition-fast);
+  flex-shrink: 0;
+}
+
+.card-title-link:hover .inline-link-icon {
+  opacity: 1;
+  transform: translate(2px, -2px);
+  color: var(--accent-coral);
+}
+
+.card-link-wrapper {
+  margin-top: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px dashed var(--border-subtle);
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.25rem;
+}
+
+.project-external-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--accent-coral);
+  text-decoration: none;
+  letter-spacing: 0.02em;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+}
+
+.project-external-link:hover {
+  color: var(--accent-coral-hover);
+  transform: translateX(3px);
+}
+
+.project-external-link.secondary {
+  color: var(--text-secondary);
+  opacity: 0.85;
+}
+
+.project-external-link.secondary:hover {
+  color: var(--text-primary);
+  opacity: 1;
+}
+
+.inline-project-link {
+  color: var(--accent-coral);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  font-weight: 500;
+  transition: color var(--transition-fast);
+}
+
+.inline-project-link:hover {
+  color: var(--accent-coral-hover);
+}
+
 /* --------------------------------------------------------------------------
    10. BECERİLER & DİLLER BÖLÜMÜ
    -------------------------------------------------------------------------- */

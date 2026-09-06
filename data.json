@@ -59,14 +59,19 @@
   ],
   "projects": [
     {
-      "name": "Pomodoro v0.3",
-      "period": "Ekim 2025",
-      "description": "Python ve CustomTkinter kullanılarak geliştirilen, çalışma sürelerini takip etmeye ve kişisel verimliliği artırmaya yönelik masaüstü Pomodoro uygulaması. Uygulamada modüler mimari, kalıcı veri yönetimi, güvenli zamanlayıcı altyapısı, hedef takibi, etkinlik yönetimi ve görsel istatistikler geliştirilmiştir.",
-      "outcomes": ["JSON tabanlı kalıcı veri yönetimi ve cache mekanizması geliştirildi.",
-      "Görev/süre bazlı hedef takibi, geçmiş kayıtları ve günlük–yıllık verimlilik istatistikleri oluşturuldu.",
-      "Canvas tabanlı grafikler, analog/dijital timer ve dinamik arka plan animasyonu geliştirildi.",
-      "Takvim, etkinlik geri sayımı, timezone-aware tarih/saat kontrolü ve özelleştirilebilir tema/ses sistemi eklendi."
-    ]
+      "name": "İlim Yuvası — Sanal Kütüphane & Sosyal Pomodoro",
+      "period": "2025",
+      "description": "Gerçek bir kütüphanenin huzurlu çalışma ortamını dijital ortama taşıyan, 4 kişilik sanal masalarda birlikte çalışma (body-doubling / co-working) ve derin odaklanma deneyimi sunan yeni nesil sosyal Pomodoro web uygulaması. Projeyi doğrudan canlı olarak [İlim Yuvası V0.4](https://evazakli.github.io/ilim-yuvasi/) üzerinden deneyimleyebilirsiniz.",
+      "link": "https://evazakli.github.io/ilim-yuvasi/",
+      "linkLabel": "İlim Yuvası V0.4 (Canlı Sayfa)",
+      "github": "https://github.com/evazakli/ilim-yuvasi",
+      "outcomes": [
+        "React, TypeScript, Vite ve Tailwind CSS altyapısıyla modüler, modern ve yüksek performanslı bileşen mimarisi geliştirildi.",
+        "4 kişilik interaktif masalar, kişiselleştirilebilir karakter stüdyosu (avatar) ve çalışma durumuna göre canlı odaklanma animasyonları tasarlandı.",
+        "Analog saat kadranı ve dijital göstergeli çift zamanlayıcı ile Pomodoro (25/5, 50/10 ve özel süreler) döngüleri oluşturuldu.",
+        "Huzur veren ortam sesleri (yağmur, şömine, kütüphane uğultusu) ve dikkat dağıtmayan sessiz emoji tabanlı mikro etkileşim sistemi entegre edildi.",
+        "Geçmiş seans günlüğü, takvim & etkinlik geri sayımı, süre/görev odaklı hedefler ve detaylı aktivite istatistik grafikleri eklendi."
+      ]
     },
     {
       "name": "Akıllı Telefon Tabanlı Ataletsel Navigasyon Sistemi",
