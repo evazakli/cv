@@ -59,6 +59,21 @@
   ],
   "projects": [
     {
+      "name": "Çelimeluk — Türkçe Kelime Tahmin Oyunu",
+      "period": "2026",
+      "description": "Kapsamlı Türkçe 5 harfli kelime haznesiyle geliştirilen; hem tüm oyuncuların günün ortak kelimesini bulmak için yarıştığı Günlük (Daily) modunu, hem de sınırsız pratik imkânı sunan Alıştırma (Practice) modunu barındıran modern kelime tahmin web oyunu. Projeyi doğrudan [Çelimeluk (Canlı Oyun)](https://evazakli.github.io/celimeluk/) üzerinden deneyimleyebilirsiniz.",
+      "link": "https://evazakli.github.io/celimeluk/",
+      "linkLabel": "Çelimeluk (Canlı Oyunu Oyna)",
+      "github": "https://github.com/evazakli/celimeluk",
+      "outcomes": [
+        "Kapsamlı Türkçe 5 harfli kelime veritabanı ve Wordle mekaniğine dayalı renkli harf doğrulama (yeşil/sarı/gri) tahmin algoritması geliştirildi.",
+        "Günlük (Daily - tüm kullanıcılar için tek ortak kelime) ve Alıştırma (Practice - limitsiz pratik) olmak üzere çift oyun modu kurgulandı.",
+        "Google Firebase (Auth & Firestore) entegrasyonu ile Google hesabıyla tek tıkla oturum açma, bulut tabanlı skor eşitleme ve genel Liderlik Tablosu (Şampiyonlar) oluşturuldu.",
+        "Milisaniye hassasiyetli süre sayacı, tahmin sayısına dayalı dinamik puanlama ve oyun sonu emoji tabanlı renkli sonuç paylaşım sistemi eklendi.",
+        "Türkçe karakter destekli etkileşimli sanal klavye, fiziksel klavye dinleyicisi, konfeti kutlamaları ve mobil öncelikli responsive arayüz tasarlandı."
+      ]
+    },
+    {
       "name": "İlim Yuvası — Sanal Kütüphane & Sosyal Pomodoro",
       "period": "2025",
       "description": "Gerçek bir kütüphanenin huzurlu çalışma ortamını dijital ortama taşıyan, 4 kişilik sanal masalarda birlikte çalışma (body-doubling / co-working) ve derin odaklanma deneyimi sunan yeni nesil sosyal Pomodoro web uygulaması. Projeyi doğrudan canlı olarak [İlim Yuvası V0.4](https://evazakli.github.io/ilim-yuvasi/) üzerinden deneyimleyebilirsiniz.",
