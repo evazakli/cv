@@ -59,6 +59,21 @@
   ],
   "projects": [
     {
+      "name": "Filmlik — Rastgele IMDb Film Seçici",
+      "period": "2026",
+      "description": "\"Bu akşam ne izlesem?\" sorusunu karmaşık menüler, reklamlar ve algoritma önyargıları olmadan çözen; IMDb puanı 7.0 ve üzerindeki 4.682 seçkin film arasından kriptografik rastgelelikle öneri sunan sinematik film keşif web uygulaması. Projeyi doğrudan canlı olarak [Filmlik (Canlı Uygulama)](https://evazakli.github.io/filmlik/) üzerinden deneyimleyebilirsiniz.",
+      "link": "https://evazakli.github.io/filmlik/",
+      "linkLabel": "Filmlik (Canlı Uygulama)",
+      "github": "https://github.com/evazakli/filmlik",
+      "outcomes": [
+        "IMDb puanı 7.0 ve üzerinde olan 4.682 nitelikli filmden oluşan (tür, yıl, süre, yönetmen, oyuncu kadrosu, özet ve yüksek çözünürlüklü afiş verilerini içeren) kapsamlı veri havuzu oluşturuldu.",
+        "Web Crypto API ve rejection sampling algoritmasıyla %100 adil, sapmasız rastgele seçim mekanizması ile 22 farklı film türü ve yıl aralığı (1916–2026) filtreleme sistemi geliştirildi.",
+        "3D Selüloid Tüneli (Vortex), Holografik Kader Kartları (Tarot) ve Kuantum Boyut Yırtılması (Rift) olmak üzere 3 farklı 3D Canvas sinematik seçim şovu tasarlandı.",
+        "Harici ses dosyası kullanmadan Web Audio API osilatörleriyle gerçek zamanlı 35mm projektör tıkırtısı, portal frekansı ve IMAX/THX tarzı sinema akoru sentezleyen prosedürel ses motoru entegre edildi.",
+        "Sıfır bağımlılık (Vanilla JS, OKLCH renk sistemi, View Transitions API) mimarisiyle fare hareketine duyarlı 3D holografik film kartı ve yüksek performanslı arayüz geliştirildi."
+      ]
+    },
+    {
       "name": "Çelimeluk — Türkçe Kelime Tahmin Oyunu",
       "period": "2026",
       "description": "Kapsamlı Türkçe 5 harfli kelime haznesiyle geliştirilen; hem tüm oyuncuların günün ortak kelimesini bulmak için yarıştığı Günlük (Daily) modunu, hem de sınırsız pratik imkânı sunan Alıştırma (Practice) modunu barındıran modern kelime tahmin web oyunu. Projeyi doğrudan [Çelimeluk (Canlı Oyun)](https://evazakli.github.io/celimeluk/) üzerinden deneyimleyebilirsiniz.",
