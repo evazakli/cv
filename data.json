@@ -61,16 +61,16 @@
     {
       "name": "Filmlik — Rastgele IMDb Film Seçici",
       "period": "2026",
-      "description": "\"Bu akşam ne izlesem?\" sorusunu karmaşık menüler, reklamlar ve algoritma önyargıları olmadan çözen; IMDb puanı 7.0 ve üzerindeki 4.682 seçkin film arasından kriptografik rastgelelikle öneri sunan sinematik film keşif web uygulaması. Projeyi doğrudan canlı olarak [Filmlik (Canlı Uygulama)](https://evazakli.github.io/filmlik/) üzerinden deneyimleyebilirsiniz.",
+      "description": "\"Bu akşam ne izlesem?\" sorusunu karmaşık menüler, reklamlar ve algoritma önyargıları olmadan çözen; 69.028 gerçek IMDb filmi (7.0+ puanlı 18.193 seçkin yapım) arasından kriptografik rastgelelikle öneri sunan sinematik film keşif web uygulaması. Projeyi doğrudan canlı olarak [Filmlik (Canlı Uygulama)](https://evazakli.github.io/filmlik/) üzerinden deneyimleyebilirsiniz.",
       "link": "https://evazakli.github.io/filmlik/",
       "linkLabel": "Filmlik (Canlı Uygulama)",
       "github": "https://github.com/evazakli/filmlik",
       "outcomes": [
-        "IMDb puanı 7.0 ve üzerinde olan 4.682 nitelikli filmden oluşan (tür, yıl, süre, yönetmen, oyuncu kadrosu, özet ve yüksek çözünürlüklü afiş verilerini içeren) kapsamlı veri havuzu oluşturuldu.",
-        "Web Crypto API ve rejection sampling algoritmasıyla %100 adil, sapmasız rastgele seçim mekanizması ile 22 farklı film türü ve yıl aralığı (1916–2026) filtreleme sistemi geliştirildi.",
+        "69.028 filmlik dev IMDb veri havuzunu yüksek performansla sunmak için ~295 KB boyutunda sıkıştırılmış ikili (TypedArray) filtre indeksi ve ihtiyaç anında (on-demand) yüklenen 346 veri parçalı (sharding) mimari geliştirildi.",
+        "Çift uçlu interaktif IMDb puan aralığı çizgisi (0–10, varsayılan 7.0+ ile 18.193 film), 22 film türü ve yıl aralığı (1915–2027) filtreleriyle Web Crypto API + rejection sampling tabanlı %100 adil seçim algoritması kurgulandı.",
         "3D Selüloid Tüneli (Vortex), Holografik Kader Kartları (Tarot) ve Kuantum Boyut Yırtılması (Rift) olmak üzere 3 farklı 3D Canvas sinematik seçim şovu tasarlandı.",
         "Harici ses dosyası kullanmadan Web Audio API osilatörleriyle gerçek zamanlı 35mm projektör tıkırtısı, portal frekansı ve IMAX/THX tarzı sinema akoru sentezleyen prosedürel ses motoru entegre edildi.",
-        "Sıfır bağımlılık (Vanilla JS, OKLCH renk sistemi, View Transitions API) mimarisiyle fare hareketine duyarlı 3D holografik film kartı ve yüksek performanslı arayüz geliştirildi."
+        "Sıfır bağımlılık (Vanilla JS, OKLCH dinamik renk uzayı, View Transitions API) mimarisiyle fare hareketine duyarlı 3D holografik film kartı ve erişilebilir/performans odaklı arayüz geliştirildi."
       ]
     },
     {
