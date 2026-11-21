@@ -6,6 +6,7 @@
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initMobileMenu();
+  initAmbientEffects();
   loadDataAndRender();
 });
 
@@ -16,13 +17,13 @@ function initTheme() {
   const themeToggleBtn = document.getElementById('themeToggleBtn');
   const storedTheme = localStorage.getItem('theme');
   const prefersDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  
+
   const currentTheme = storedTheme || (prefersDark ? 'dark' : 'light');
   applyTheme(currentTheme);
 
   if (themeToggleBtn) {
     themeToggleBtn.addEventListener('click', () => {
-      const activeTheme = document.body.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      const activeTheme = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
       applyTheme(activeTheme);
       localStorage.setItem('theme', activeTheme);
     });
@@ -39,6 +40,7 @@ function initTheme() {
 }
 
 function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
   document.body.setAttribute('data-theme', theme);
 }
 
@@ -54,7 +56,7 @@ function initMobileMenu() {
 
   mobileBtn.addEventListener('click', () => {
     const isExpanded = mobileBtn.getAttribute('aria-expanded') === 'true';
-    mobileBtn.setAttribute('aria-expanded', !isExpanded);
+    mobileBtn.setAttribute('aria-expanded', String(!isExpanded));
     mobileDrawer.classList.toggle('open');
   });
 
@@ -75,7 +77,70 @@ function initMobileMenu() {
 }
 
 /* --------------------------------------------------------------------------
-   3. DATA.JSON FETCH & DİNAMİK DOM RENDER
+   3. AMBIENT SPOTLIGHT & SCROLL İLERLEME ÇUBUĞU
+   -------------------------------------------------------------------------- */
+function initAmbientEffects() {
+  const header = document.getElementById('siteHeader');
+  const progressBar = document.getElementById('scrollProgressBar');
+  const ambientSpotlight = document.getElementById('ambientSpotlight');
+
+  // Scroll ilerleme ve yüzen header durumu
+  let scrollTicking = false;
+  const updateScrollState = () => {
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const docHeight = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const progress = docHeight > 0 ? Math.min(scrollTop / docHeight, 1) : 0;
+
+    if (progressBar) {
+      progressBar.style.transform = `scaleX(${progress})`;
+    }
+    if (header) {
+      header.classList.toggle('is-scrolled', scrollTop > 24);
+    }
+    scrollTicking = false;
+  };
+
+  window.addEventListener('scroll', () => {
+    if (!scrollTicking) {
+      window.requestAnimationFrame(updateScrollState);
+      scrollTicking = true;
+    }
+  }, { passive: true });
+  updateScrollState();
+
+  // İnce İmleç Işığı (Yalnızca fare/trackpad cihazlarda)
+  if (window.matchMedia && window.matchMedia('(pointer: fine)').matches) {
+    let pointerTicking = false;
+    let clientX = 0;
+    let clientY = 0;
+
+    window.addEventListener('pointermove', (e) => {
+      clientX = e.clientX;
+      clientY = e.clientY;
+
+      if (!pointerTicking) {
+        window.requestAnimationFrame(() => {
+          if (ambientSpotlight) {
+            ambientSpotlight.style.setProperty('--ambient-x', `${clientX}px`);
+            ambientSpotlight.style.setProperty('--ambient-y', `${clientY}px`);
+          }
+
+          const hoveredCard = document.elementFromPoint(clientX, clientY)?.closest('.spotlight-card');
+          if (hoveredCard) {
+            const rect = hoveredCard.getBoundingClientRect();
+            hoveredCard.style.setProperty('--mouse-x', `${clientX - rect.left}px`);
+            hoveredCard.style.setProperty('--mouse-y', `${clientY - rect.top}px`);
+          }
+          pointerTicking = false;
+        });
+        pointerTicking = true;
+      }
+    }, { passive: true });
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. DATA.JSON FETCH & DİNAMİK DOM RENDER
    -------------------------------------------------------------------------- */
 async function loadDataAndRender() {
   try {
@@ -90,7 +155,7 @@ async function loadDataAndRender() {
     }
 
     const data = await response.json();
-    
+
     // Verileri ilgili bölümlere bas
     renderProfile(data.profile);
     renderExperience(data.experience);
@@ -112,7 +177,7 @@ async function loadDataAndRender() {
 }
 
 /* --------------------------------------------------------------------------
-   4. BÖLÜM RENDER FONKSİYONLARI (XSS GÜVENLİ & TEMİZ ŞABLONLAR)
+   5. BÖLÜM RENDER FONKSİYONLARI (XSS GÜVENLİ & TEMİZ ŞABLONLAR)
    -------------------------------------------------------------------------- */
 
 // HTML Kaçış Yardımcısı
@@ -156,8 +221,8 @@ function renderExperience(experienceList) {
   const container = document.getElementById('experienceContainer');
   if (!container || !experienceList) return;
 
-  container.innerHTML = experienceList.map(item => `
-    <article class="tech-card reveal-on-scroll">
+  container.innerHTML = experienceList.map((item, idx) => `
+    <article class="tech-card spotlight-card reveal-on-scroll" style="--stagger-index: ${idx}">
       <div class="card-top-meta">
         <time class="card-period">${escapeHTML(item.period)}</time>
       </div>
@@ -172,7 +237,7 @@ function renderEducation(educationList) {
   const container = document.getElementById('educationContainer');
   if (!container || !educationList) return;
 
-  container.innerHTML = educationList.map(item => {
+  container.innerHTML = educationList.map((item, idx) => {
     const detailsHtml = (item.details && item.details.length > 0)
       ? `<ul class="card-details-list">
           ${item.details.map(d => `
@@ -185,7 +250,7 @@ function renderEducation(educationList) {
       : '';
 
     return `
-      <article class="tech-card reveal-on-scroll">
+      <article class="tech-card spotlight-card reveal-on-scroll" style="--stagger-index: ${idx}">
         <div class="card-top-meta">
           <time class="card-period">${escapeHTML(item.period)}</time>
         </div>
@@ -201,7 +266,7 @@ function renderProjects(projectsList) {
   const container = document.getElementById('projectsContainer');
   if (!container || !projectsList) return;
 
-  container.innerHTML = projectsList.map(item => {
+  container.innerHTML = projectsList.map((item, idx) => {
     const outcomesHtml = (item.outcomes && item.outcomes.length > 0)
       ? `<ul class="card-details-list">
           ${item.outcomes.map(o => `
@@ -239,7 +304,7 @@ function renderProjects(projectsList) {
       : '';
 
     return `
-      <article class="tech-card reveal-on-scroll">
+      <article class="tech-card spotlight-card reveal-on-scroll" style="--stagger-index: ${idx}">
         <div class="card-top-meta">
           <time class="card-period">${escapeHTML(item.period)}</time>
         </div>
@@ -256,7 +321,7 @@ function renderCourses(coursesList) {
   const container = document.getElementById('coursesContainer');
   if (!container || !coursesList) return;
 
-  container.innerHTML = coursesList.map(item => {
+  container.innerHTML = coursesList.map((item, idx) => {
     const detailsHtml = (item.details && item.details.length > 0)
       ? `<ul class="card-details-list">
           ${item.details.map(d => `
@@ -269,7 +334,7 @@ function renderCourses(coursesList) {
       : '';
 
     return `
-      <article class="tech-card reveal-on-scroll">
+      <article class="tech-card spotlight-card reveal-on-scroll" style="--stagger-index: ${idx}">
         <div class="card-top-meta">
           <time class="card-period">${escapeHTML(item.period)}</time>
         </div>
@@ -306,8 +371,8 @@ function renderExams(examsList) {
   const container = document.getElementById('examsContainer');
   if (!container || !examsList) return;
 
-  container.innerHTML = examsList.map(exam => `
-    <div class="exam-card reveal-on-scroll">
+  container.innerHTML = examsList.map((exam, idx) => `
+    <div class="exam-card spotlight-card reveal-on-scroll" style="--stagger-index: ${idx}">
       <div class="exam-meta">
         <span class="exam-name">${escapeHTML(exam.name)}</span>
       </div>
@@ -324,19 +389,19 @@ function renderContact(profile) {
   if (!container || !profile) return;
 
   container.innerHTML = `
-    <a href="mailto:${escapeHTML(profile.email)}" class="contact-item">
+    <a href="mailto:${escapeHTML(profile.email)}" class="contact-item spotlight-card reveal-on-scroll" style="--stagger-index: 0">
       <span class="contact-label">E-POSTA</span>
       <span class="contact-value">${escapeHTML(profile.email)}</span>
       <span class="contact-action-hint">Doğrudan mesaj gönder ›</span>
     </a>
 
-    <a href="tel:${escapeHTML(profile.phone)}" class="contact-item">
+    <a href="tel:${escapeHTML(profile.phone)}" class="contact-item spotlight-card reveal-on-scroll" style="--stagger-index: 1">
       <span class="contact-label">TELEFON</span>
       <span class="contact-value">${escapeHTML(profile.phone)}</span>
       <span class="contact-action-hint">Arama başlat ›</span>
     </a>
 
-    <a href="${escapeHTML(profile.github)}" target="_blank" rel="noopener noreferrer" class="contact-item">
+    <a href="${escapeHTML(profile.github)}" target="_blank" rel="noopener noreferrer" class="contact-item spotlight-card reveal-on-scroll" style="--stagger-index: 2">
       <span class="contact-label">GITHUB</span>
       <span class="contact-value">github.com/evazakli</span>
       <span class="contact-action-hint">Depoları ve projeleri incele ›</span>
@@ -347,7 +412,7 @@ function renderContact(profile) {
 function showDataErrorNotice() {
   const main = document.getElementById('mainContent');
   if (!main) return;
-  
+
   const notice = document.createElement('div');
   notice.style.cssText = `
     margin: 2rem auto;
@@ -370,12 +435,12 @@ function showDataErrorNotice() {
 }
 
 /* --------------------------------------------------------------------------
-   5. SCROLL OBSERVER & AKTİF MENÜ İZLEYİCİSİ (SCROLL SPY)
+   6. SCROLL OBSERVER & AKTİF MENÜ İZLEYİCİSİ (SCROLL SPY)
    -------------------------------------------------------------------------- */
 function initScrollObservers() {
   // 1. Kartların yumuşakça görünmesi (Reveal on Scroll)
   const revealElements = document.querySelectorAll('.reveal-on-scroll');
-  
+
   if ('IntersectionObserver' in window) {
     const revealObserver = new IntersectionObserver((entries, observer) => {
       entries.forEach(entry => {
@@ -386,13 +451,12 @@ function initScrollObservers() {
       });
     }, {
       root: null,
-      threshold: 0.1,
-      rootMargin: '0px 0px -40px 0px'
+      threshold: 0.08,
+      rootMargin: '0px 0px -30px 0px'
     });
 
     revealElements.forEach(el => revealObserver.observe(el));
   } else {
-    // Fallback: Eski tarayıcılarda direkt görünür yap
     revealElements.forEach(el => el.classList.add('is-visible'));
   }
 
@@ -416,8 +480,8 @@ function initScrollObservers() {
       });
     }, {
       root: null,
-      threshold: 0.25,
-      rootMargin: '-70px 0px -40% 0px'
+      threshold: 0.2,
+      rootMargin: '-80px 0px -45% 0px'
     });
 
     sections.forEach(sec => sectionObserver.observe(sec));
